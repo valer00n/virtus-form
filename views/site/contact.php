@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
-use kartik\datetime\DateTimePicker;
+use dosamigos\datetimepicker\DateTimePicker;
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 public $proofs; 
             -->
                 <?php $form = ActiveForm::begin([
-                        'id' => 'contact-form',
-                        // 'options' => ['enctype'=>'multipart/form-data']
+                        'id' => 'ContactRequest',
+                        'options' => ['enctype'=>'multipart/form-data']
                     ]); ?>
 
                 <?php
@@ -71,21 +71,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo $form->field($model, 'task_type')->dropDownList($items, $params);
                 ?>    
 
+                    <?= DateTimePicker::widget([
+                        'model' => $model,
+                        'attribute' => 'duedate',
+                        'language' => 'ru',
+                        'size' => 'ms',
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd-mm-yyyy HH:ii',
+                            'todayBtn' => true
+                        ]
+                    ]);?>              
+
                     <?= $form->field($model, 'description')->textArea(['rows' => 6]) ?>
 
                     <?= $form->field($model, 'slogan')->textInput() ?>
-
-                    <?= DateTimePicker::widget([
-                        'name' => 'datetime_10',
-                        'options' => ['placeholder' => 'Select operating time ...'],
-                        'convertFormat' => true,
-                        'pluginOptions' => [
-                            'format' => 'dd-mm-yyyy hh:ii:ss',
-                            // 'startDate' => '01-01-2016 12:00',
-                            'todayHighlight' => true
-                        ]
-                    ]);
-                    ?>
 
                     <?= $form->field($model, 'proofs')->textArea(['rows' => 6]) ?>
 

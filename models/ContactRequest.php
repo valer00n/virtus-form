@@ -17,14 +17,15 @@ class ContactRequest extends ActiveRecord
     public $sizes;
     public $duedate;
     public $proofs;
-    public $verifyCode;
+    // public $verifyCode;
 
-    /**
+     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
+            [['initiator', 'task_type', 'description', 'slogan', 'duedate', 'proofs'], 'safe']
             // name, email, subject and body are required
             // [['name', 'email', 'subject', 'body'], 'required'],
             // email has to be a valid email address
