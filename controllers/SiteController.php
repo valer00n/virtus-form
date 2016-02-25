@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UploadedFile;
+
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactRequest;
@@ -84,13 +86,26 @@ class SiteController extends Controller
         // $model->duedate = Yii::$app->formatter->asDatetime($post['ContactRequest[duedate]'], 'd-m-Y H:i:s');
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->duedate = Yii::$app->formatter->asDatetime($_POST['ContactRequest']['duedate'], 'Y-M-d H:i:s');
-            $model->sizes = join('; ', $_POST['ContactRequest']['sizes']);
-            $model->sizes .= $_POST['ContactRequest']['sizesmore'];
 
-            $model->save();
-            Yii::$app->session->setFlash('contactFormSubmitted');
-            return $this->refresh();
+            $model->duedate = Yii::$app->formatter->asDatetime($_POST['ContactRequest']['duedate'], 'Y-M-d H:i:s');
+            if ($_POST['ContactRequest']['sizes']){
+                $model->sizes = join('; ', $_POST['ContactRequest']['sizes']);
+                $model->sizes .= '; '. $_POST['ContactRequest']['sizesmore'];
+            }
+
+            if($model->save()){
+
+                $model->attachments = UploadedFile::getInstances($model, 'attachments');
+                if ($model->upload()) {
+
+                }
+
+                //create attachments
+
+                Yii::$app->session->setFlash('contactFormSubmitted');
+                return $this->refresh();   
+            }
+
         }
 
         return $this->render('contact', [

@@ -91,7 +91,7 @@ $this->title = 'Универсальная форма';
 
                     echo $form->field($model, 'sizes')->checkboxList($items, $params);
                 ?>
-                <?= $form->field($model, 'sizes')->textInput() ?>
+                <?= $form->field($model, 'sizesmore')->textInput() ?>
 
                     <?= DateTimePicker::widget([
                         'model' => $model,
@@ -111,6 +111,17 @@ $this->title = 'Универсальная форма';
 
                     <?= $form->field($model, 'proofs')->textArea(['rows' => 6]) ?>
 
+                    <?= $form->field($model, 'attachments[]')->widget(\dosamigos\fileinput\BootstrapFileInput::className(), [
+                        'options' => ['accept' => 'image/*', 'multiple' => true],
+                        'clientOptions' => [
+                            'previewFileType' => 'text',
+                            'browseClass' => 'btn btn-success',
+                            'uploadClass' => 'btn btn-info',
+                            'removeClass' => 'btn btn-danger',
+                            'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> '
+                        ]
+                    ]);?>
+
                     <div class="form-group">
                         <?= Html::submitButton('Готово', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
@@ -119,8 +130,8 @@ $this->title = 'Универсальная форма';
 
             </div>
         </div>
+    <?php endif; ?>
     <div style="text-align: center;">
         <img src="/assets/virtus_142x149_20_1_.png">
-    </div>
-    <?php endif; ?>
+    </div>    
 </div>

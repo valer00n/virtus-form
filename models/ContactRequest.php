@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use \yii\db\ActiveRecord;
+use app\models\ContactAttachment;
+// use yii\web\UploadedFile;
 
 /**
  * LoginForm is the model behind the login form.
@@ -11,15 +13,18 @@ use \yii\db\ActiveRecord;
 class ContactRequest extends ActiveRecord
 {
 
+    public $sizesmore;
+    public $attachments;
      /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            [['initiator', 'task_type', 'description', 'slogan', 'duedate', 'proofs'], 'safe']
+            [['initiator', 'task_type', 'description', 'slogan', 'duedate', 'proofs', 'sizes'], 'safe'],
             // name, email, subject and body are required
-            // [['name', 'email', 'subject', 'body'], 'required'],
+            [['initiator', 'task_type', 'description', 'sizes'], 'required'],
+            [['attachments'], 'file', 'skipOnEmpty' => true, 'maxFiles' => 10],
             // email has to be a valid email address
             // ['email', 'email'],
         ];
@@ -42,9 +47,29 @@ class ContactRequest extends ActiveRecord
             'description' => 'Описание',
             'slogan' => 'Текст заголовка',
             'sizes' => 'Размеры',
+            'sizesmore' => 'Размеры - прочее',
             'duedate' => 'Дата и время готовности',
             'proofs' => 'Пруфлинк и картинки',
             'verifyCode' => 'Проверочный код',
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) { 
+            foreach ($this->attachments as $file) {
+                $fname =  $this->id. '-' . $file->baseName . '.' . $file->extension;
+                $file->saveAs('uploads/' . $fname);
+
+                $attachment = new ContactAttachment();
+                $attachment->filename = $fname;
+                $attachment->request_id = $this->id;
+                $attachment->save();
+
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }
