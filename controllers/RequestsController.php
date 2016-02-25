@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\ContactRequest;
+use app\models\ContactAttachment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -48,8 +49,12 @@ class RequestsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $attaches = ContactAttachment::find()->where(['request_id'=>$id])->all();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'attaches' => $attaches
         ]);
     }
 

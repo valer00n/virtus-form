@@ -39,7 +39,7 @@ AppAsset::register($this);
             ['label' => 'Главная', 'url' => ['/site/index']],
             // ['label' => 'О ', 'url' => ['/site/about']],
             ['label' => 'Заявка', 'url' => ['/site/contact']],
-            !Yii::$app->user->isGuest ? (['label' => 'Заявки', 'url' => ['/requests']]) : '',
+            !Yii::$app->user->isGuest ? (['label' => 'Список заявок', 'url' => ['/requests']]) : '',
             Yii::$app->user->isGuest ? (
                 ['label' => 'Вход', 'url' => ['/site/login']]
             ) : (

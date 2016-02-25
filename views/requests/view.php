@@ -40,4 +40,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <div class="">
+        <h3>Вложения:</h3>
+        <?php foreach ($attaches as $attache): ?>
+             <div class="file-preview">
+                <div class="file-preview-thumbnails">
+                <div class="file-preview-frame" data-fileindex="0">
+                   <img src="/uploads/<?= $attache->filename; ?>" style="width:auto;height:160px;">
+                   <div class="file-thumbnail-footer">
+                    <div class="file-caption-name" title="jpkk6f www.imagesplitter.net-0-5.png" style="width: 111px;"><?= $attache->filename; ?></div>
+                    
+                </div>
+                </div>
+                </div>       
+             </div>   
+            
+        <?php endforeach; ?>
+    </div>
+
 </div>
