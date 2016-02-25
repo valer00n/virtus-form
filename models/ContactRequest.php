@@ -10,14 +10,6 @@ use \yii\db\ActiveRecord;
  */
 class ContactRequest extends ActiveRecord
 {
-    public $initiator;
-    public $task_type;
-    public $description;
-    public $slogan;
-    public $sizes;
-    public $duedate;
-    public $proofs;
-    // public $verifyCode;
 
      /**
      * @return array the validation rules.

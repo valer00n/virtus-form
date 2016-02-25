@@ -77,25 +77,19 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactRequest();
-        // $model->initiator = 'Хуй';
-        // $model->task_type = 'Хуй';
-        // $model->description = 'Хуй';
-        // $model->slogan = 'Хуй';
-        // $model->proofs = 'Хуй';
+        // $post = Yii::$app->request->post();
+        
+        // var_dump($model);
+        // exit();
+        // $model->duedate = Yii::$app->formatter->asDatetime($post['ContactRequest[duedate]'], 'd-m-Y H:i:s');
 
-        // var_dump(Yii::$app->request->post('ContactRequest'));
-        // public $initiator;
-        // public $task_type;
-        // public $description;
-        // public $slogan;
-        // public $sizes;
-        // public $duedate;
-        // public $proofs; 
-        if ($model->load($_POST) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->duedate = Yii::$app->formatter->asDatetime($_POST['ContactRequest']['duedate'], 'Y-M-d H:i:s');
+            $model->sizes = join('; ', $_POST['ContactRequest']['sizes']);
+            $model->sizes .= $_POST['ContactRequest']['sizesmore'];
+
+            $model->save();
             Yii::$app->session->setFlash('contactFormSubmitted');
-            var_dump($model);
-            exit();
-
             return $this->refresh();
         }
 
