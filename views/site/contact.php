@@ -54,9 +54,9 @@ $this->title = 'Универсальная форма';
                     $params = [
                         'prompt' => 'Выберите...'
                     ];
-                    echo $form->field($model, 'initiator')->dropDownList($items, $params);
+                    echo $form->field($model, 'initiator', ['template' => '{label}<div class="help-block help-block-info">Инициатор задачи либо смежник</div>{input}{hint}{error}'])->dropDownList($items, $params);
                 ?>    
-
+                      
                 <?php
                     $items = [
                         'Реклама' => 'Реклама',
@@ -74,8 +74,6 @@ $this->title = 'Универсальная форма';
                     echo $form->field($model, 'task_type')->dropDownList($items, $params);
                 ?>    
 
-
-
                 <?php
                 $items = array("Обложка передачи (1920х1080)" => "Обложка передачи (1920х1080)",
                 "VP: Обложка (890х300)" => "VP: Обложка (890х300)",
@@ -92,24 +90,31 @@ $this->title = 'Универсальная форма';
                     echo $form->field($model, 'sizes')->checkboxList($items, $params);
                 ?>
                 <?= $form->field($model, 'sizesmore')->textInput() ?>
+           
 
+                    <?= $form->field($model, 'description', ['template' => '{label}<div class="help-block help-block-info">Краткое описание задачи. Если имеет место быть нестандартный размер - помещать информацию здесь, либо ниже под отмеченной галочкой другое. Нестандартный тип задачи описывать здесь же.</div>{input}{hint}{error}'])->textArea(['rows' => 6,
+                    ]) ?>            
+
+                    <?= $form->field($model, 'slogan')->textInput() ?>
+
+                    <div class="form-group">
+                    <label class="control-label" for="contactrequest-duedate">Дата готовности и время готовности *</label>
                     <?= DateTimePicker::widget([
                         'model' => $model,
                         'attribute' => 'duedate',
                         'language' => 'ru',
+                        // 'label' => 'Дата готовности и время готовности *',
                         'size' => 'ms',
                         'clientOptions' => [
                             'autoclose' => true,
                             'format' => 'dd-mm-yyyy HH:ii',
                             'todayBtn' => true
                         ]
-                    ]);?>              
+                    ]);?>
+                    <div class="help-block help-block-info">Пример: 03.05.2013 15:30</div>
+                    </div>   
 
-                    <?= $form->field($model, 'description')->textArea(['rows' => 6]) ?>
-
-                    <?= $form->field($model, 'slogan')->textInput() ?>
-
-                    <?= $form->field($model, 'proofs')->textArea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'proofs', ['template' => '{label}<div class="help-block help-block-info">Ссылки на образцы (если это необходимо) и изображения для работы. Drag and Drop поможет перености ссылки в текстовом виде.</div>{input}{hint}{error}'])->textArea(['rows' => 6]) ?>
 
                     <?= $form->field($model, 'attachments[]')->widget(\dosamigos\fileinput\BootstrapFileInput::className(), [
                         'options' => ['accept' => 'image/*', 'multiple' => true],

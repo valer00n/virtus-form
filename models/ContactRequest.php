@@ -50,6 +50,7 @@ class ContactRequest extends ActiveRecord
             'sizesmore' => 'Размеры - прочее',
             'duedate' => 'Дата и время готовности',
             'proofs' => 'Пруфлинк и картинки',
+            'attachments' => 'Дополнительные материалы',
             'verifyCode' => 'Проверочный код',
         ];
     }
