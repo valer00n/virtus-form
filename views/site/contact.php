@@ -27,7 +27,7 @@ $this->title = 'Универсальная форма';
     <?php else: ?>
 
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-12">
             <!-- 
                 public $initiator;
                 public $task_type;
@@ -48,7 +48,7 @@ $this->title = 'Универсальная форма';
                         'Промо' => 'Промо',
                         'Видеостудия' => 'Видеостудия',
                         'Сайт Virtus.pro' => 'Сайт Virtus.pro',
-                        'Сайт Fragstone' => 'Сайт Fragstone'
+                        'Сайт Fragstore' => 'Сайт Fragstore'
 
                     ];
                     $params = [
@@ -56,6 +56,10 @@ $this->title = 'Универсальная форма';
                     ];
                     echo $form->field($model, 'initiator', ['template' => '{label}<div class="help-block help-block-info">Инициатор задачи либо смежник</div>{input}{hint}{error}'])->dropDownList($items, $params);
                 ?>    
+
+                <?= $form->field($model, 'email')->textInput() ?>
+
+                <?= $form->field($model, 'name')->textInput() ?>
                       
                 <?php
                     $items = [
@@ -79,6 +83,7 @@ $this->title = 'Универсальная форма';
                 "VP: Обложка (890х300)" => "VP: Обложка (890х300)",
                 "VP: Обложка для ВК (550х300)" => "VP: Обложка для ВК (550х300)",
                 "VP: Фара (370x165)" => "VP: Фара (370x165)",
+                "VP: Фара без текста (290х190)" => "VP: Фара без текста (290х190)",
                 "VP: Фара c текстом (321х321)" => "VP: Фара c текстом (321х321)",
                 "VP: Фара без текста (280х280)" => "VP: Фара без текста (280х280)",
                 "FS: Обложка (1920х577)" => "FS: Обложка (1920х577)",
@@ -114,7 +119,7 @@ $this->title = 'Универсальная форма';
                     <div class="help-block help-block-info">Пример: 03.05.2013 15:30</div>
                     </div>   
 
-                    <?= $form->field($model, 'proofs', ['template' => '{label}<div class="help-block help-block-info">Ссылки на образцы (если это необходимо) и изображения для работы. Drag and Drop поможет перености ссылки в текстовом виде.</div>{input}{hint}{error}'])->textArea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'proofs', ['template' => '{label}<div class="help-block help-block-info">Ссылки на образцы (если это необходимо) и изображения для работы. <!--Drag and Drop поможет перености ссылки в текстовом виде.--></div>{input}{hint}{error}'])->textArea(['rows' => 6]) ?>
 
                     <?= $form->field($model, 'attachments[]')->widget(\dosamigos\fileinput\BootstrapFileInput::className(), [
                         'options' => ['accept' => 'image/*', 'multiple' => true],

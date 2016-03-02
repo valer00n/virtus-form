@@ -19,15 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+            'confirm' => 'Are you sure you want to delete this item?',
+            'method' => 'post',
             ],
-        ]) ?>
-    </p>
+            ]) ?>
+        </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
             'id',
             'initiator',
             'task_type',
@@ -37,23 +37,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'duedate',
             'proofs:ntext',
             'priority',
-        ],
-    ]) ?>
+            ],
+            ]) ?>
 
-    <div class="">
-        <h3>Вложения:</h3>
-        <?php foreach ($attaches as $attache): ?>
-             <div class="file-preview">
-                <div class="file-preview-thumbnails">
-                <div class="file-preview-frame" data-fileindex="0">
-                   <img src="/uploads/<?= $attache->filename; ?>" style="width:auto;height:160px;">
-                   <div class="file-thumbnail-footer">
-                    <div class="file-caption-name" title="jpkk6f www.imagesplitter.net-0-5.png" style="width: 111px;"><?= $attache->filename; ?></div>
-                    
-                </div>
-                </div>
+            <div class="">
+                <h3>Вложения:</h3>
+                <?php foreach ($attaches as $attache): ?>
+                   <div class="file-preview">
+                    <div class="file-preview-thumbnails">
+                        <div class="file-preview-frame" data-fileindex="0">
+                             <div class="file-thumbnail-header">
+                                <div class="file-caption-name" title="jpkk6f www.imagesplitter.net-0-5.png"><?= $attache->filename; ?></div>
+                            </div>
+                            <img src="/uploads/<?= $attache->filename; ?>" style="width:auto;height:160px;">
+                        </div>
+                    <a href='/uploads/<?= $attache->filename; ?>' target="_BLANK" type="button" class="btn btn-primary">Открыть в новом окне</a>
+                    <a type="button" class="btn btn-success">Сохранить</a>
                 </div>       
-             </div>   
+            </div>  
+            <hr> 
             
         <?php endforeach; ?>
     </div>

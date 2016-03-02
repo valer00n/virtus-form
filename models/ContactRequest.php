@@ -24,6 +24,7 @@ class ContactRequest extends ActiveRecord
             [['initiator', 'task_type', 'description', 'slogan', 'duedate', 'proofs', 'sizes'], 'safe'],
             // name, email, subject and body are required
             [['initiator', 'task_type', 'description', 'sizes'], 'required'],
+            ['email', 'email'],
             [['attachments'], 'file', 'skipOnEmpty' => true, 'maxFiles' => 10],
             // email has to be a valid email address
             // ['email', 'email'],
@@ -52,6 +53,8 @@ class ContactRequest extends ActiveRecord
             'proofs' => 'Пруфлинк и картинки',
             'attachments' => 'Дополнительные материалы',
             'verifyCode' => 'Проверочный код',
+            'email' => 'Адрес электронной почты',
+            'name' => 'Имя'
         ];
     }
 
