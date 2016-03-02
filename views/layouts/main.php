@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Иллюстрации',
+        'brandLabel' => 'Заказ иллюстрации',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,9 +36,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
-            // ['label' => 'О ', 'url' => ['/site/about']],
+            // ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Заявка', 'url' => ['/site/contact']],
+            ['label' => 'Справка', 'url' => ['/site/about']],            
             !Yii::$app->user->isGuest ? (['label' => 'Список заявок', 'url' => ['/requests']]) : '',
             Yii::$app->user->isGuest ? (
                 ['label' => 'Вход', 'url' => ['/site/login']]
