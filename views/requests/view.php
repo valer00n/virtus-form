@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ContactRequest */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Contact Requests', 'url' => ['index']];
+$this->title = $model->id . '. ' . $model->initiator . ' / ' . $model->task_type . ' / ' . $model->slogan;
+$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contact-request-view">
@@ -28,8 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-            'id',
+            // 'id',
             'initiator',
+            'email',
+            'name',
             'task_type',
             'description:ntext',
             'slogan:ntext',

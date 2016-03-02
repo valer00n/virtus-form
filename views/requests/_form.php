@@ -12,7 +12,23 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php
+        $items = [
+            '1' => 'Красный',
+            '2' => 'Желтый',
+            '3' => 'Зелёный',
+        ];
+        $params = [
+            'prompt' => 'Не выбран'
+        ];
+        echo $form->field($model, 'status')->dropDownList($items, $params);
+    ?>    
+
     <?= $form->field($model, 'initiator')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'task_type')->textInput(['maxlength' => true]) ?>
 

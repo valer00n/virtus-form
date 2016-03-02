@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\models\ContactRequest;
 use app\models\ContactAttachment;
 use yii\data\ActiveDataProvider;
@@ -17,7 +18,27 @@ class RequestsController extends Controller
 {
     public function behaviors()
     {
+
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create', 'update', 'delete'],
+                        'allow' => true,
+                        // 'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return  \Yii::$app->user->id == 100;
+                        }
+                    ],
+                ],
+            ],        
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

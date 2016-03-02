@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Contact Requests';
+$this->title = 'Заявки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contact-request-index">
@@ -20,16 +20,39 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            // ['class' => 'yii\grid\SerialColumn'],
+            // ['class' => 'app\commands\StatusColumn'],
+            'id',        
+            [
+                'attribute' => 'status',
+                'format' => 'raw',
+                'value' => function ($model) {                      
+                    switch ($model->status) {
+                        case 1:
+                            return "<div style='background-color: red; min-width: 32px; min-height: 32px;'></div>";
+                            break;
+                        case 2:
+                            return "<div style='background-color: yellow; min-width: 32px; min-height: 32px;'></div>";
+                            break;
+                        case 3:
+                            return "<div style='background-color: green; min-width: 32px; min-height: 32px;'></div>";
+                            break;
+                        
+                        default:
+                            return "<div style='background-color: #fff;'></div>";
+                            break;
+                    }
+                },
+            ],        
             'initiator',
+            'email',
+            'name', 
             'task_type',
-            'description:ntext',
+            // 'description:ntext',
             'slogan:ntext',
             'sizes:ntext',
             'duedate',
-            'proofs:ntext',
+            // 'proofs:ntext',
             // 'priority',
 
             ['class' => 'yii\grid\ActionColumn'],

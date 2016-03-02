@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ContactRequest */
 
-$this->title = 'Update Contact Request: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Contact Requests', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->title = 'Update Contact Request: ' . ' ' . $model->id . '. ' . $model->initiator . ' / ' . $model->task_type . ' / ' . $model->slogan;
+$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id . '. ' . $model->initiator . ' / ' . $model->task_type . ' / ' . $model->slogan, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="contact-request-update">
