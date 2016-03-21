@@ -21,7 +21,7 @@ class ContactRequest extends ActiveRecord
     public function rules()
     {
         return [
-            [['initiator', 'task_type', 'description', 'slogan', 'duedate', 'proofs', 'sizes', 'status', 'priority'], 'safe'],
+            [['initiator', 'task_type', 'description', 'slogan', 'duedate', 'proofs', 'sizes', 'status', 'priority', 'comment'], 'safe'],
             // name, email, subject and body are required
             [['initiator', 'task_type', 'description', 'sizes'], 'required'],
             ['email', 'email'],

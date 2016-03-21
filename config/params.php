@@ -2,5 +2,5 @@
 
 return [
     // 'adminEmail' => 'design@virtus.pro',
-  'adminEmail' => 'pazyuk@f90.me',
+  'adminEmail' => 'valeriy.pazyuk@yandex.ru',
 ];

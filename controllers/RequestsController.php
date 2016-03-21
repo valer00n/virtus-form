@@ -16,6 +16,17 @@ use yii\filters\VerbFilter;
  */
 class RequestsController extends Controller
 {
+
+    public function beforeAction($action)
+    {
+        // ...set `$this->enableCsrfValidation` here based on some conditions...
+        // call parent method that will check CSRF if such property is true.
+        if ($action->id === 'comment') {
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    } 
+
     public function behaviors()
     {
 
@@ -30,7 +41,7 @@ class RequestsController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['create', 'update', 'delete'],
+                        'actions' => ['create', 'update', 'delete', 'comment'],
                         'allow' => true,
                         // 'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -125,6 +136,21 @@ class RequestsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionComment(){
+
+        $this->enableCsrfValidation = false;
+
+        $post = Yii::$app->request->post();
+        $model = $this->findModel($post['id']);
+
+        var_dump($model);
+
+        $model->comment = $post['comment'];
+        $model->save();
 
         return $this->redirect(['index']);
     }
